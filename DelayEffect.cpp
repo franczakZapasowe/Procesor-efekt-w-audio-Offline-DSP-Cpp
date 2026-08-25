@@ -4,11 +4,13 @@
 
 #include "DelayEffect.h"
 // musimy zwiekszyc rozmiar wektora zeby miec miejsce na ogon
-void DelayEffect::process(std::vector<float> &t) {
-    t.resize(t.size()+m_offset*5);
-    for (size_t i =0 ; i <t.size(); ++i) {
-        int indexPrzeszly = i - m_offset;
-        if (indexPrzeszly >= 0) // ZERO TO JUŻ INDEX!!
-            t[i]+=t[indexPrzeszly]*m_delayGain;
+// liczymy index naszej starej probki w czasie jezeli jest mnieszny niz 0 czekamy
+// jak jest wiekszy dodajemy do aktualnego stary * gain
+void DelayEffect::process(std::vector<float> & t) {
+    t.resize(t.size() + m_offset*10);
+    for (int i = 0; i < t.size(); i++) {
+        int index = i - m_offset;
+        if (index>=0)
+        t[i]+= t[index]*m_gain;
     }
 }

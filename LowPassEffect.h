@@ -1,9 +1,4 @@
-//
-// Created by mf on 8/25/26.
-//
-
-#ifndef OFFLINEDSP_LOWPASSEFFECT_H
-#define OFFLINEDSP_LOWPASSEFFECT_H
+#pragma once
 #include "AudioEffect.h"
 
 /* Równanie różnicowe (Filtr IIR)
@@ -16,15 +11,12 @@ Im bliżej zera, tym bardziej gwałtowne skoki są tłumione, a dźwięk staje s
 
 
 // Wazne jest to że są 2 kanały nie mozna zapisać do prawego wartosci z lewego
-
-class LowPassEffect:public AudioEffect {
+class LowPassFilter : public AudioEffect {
+    float m_left = 0.0f;
+    float m_right = 0.0f;
     float m_a;
-    float m_left = 0;
-    float m_right = 0;
-public:
-    LowPassEffect(float a):m_a(a) {};
-    void process(std::vector<float> &) override;
+    public:
+    LowPassFilter(float a): m_a(a) {}; // a to wartosc od 0.0 - 1.0
+    void process(std::vector<float> &t)override;
 };
 
-
-#endif //OFFLINEDSP_LOWPASSEFFECT_H

@@ -13,16 +13,16 @@ Im bliżej zera, tym bardziej gwałtowne skoki są tłumione, a dźwięk staje s
 
 
 //nieparzyste wartosci to kanal lewy w stero wav zawsze zaczyna sie od lewego
-void LowPassEffect::process(std::vector<float> &tab) {
-    int kanal = 0;
-    for (int i = 0; i < tab.size(); i++) {
-        kanal = i % 2;
-        if (kanal == 0) { //lewy
-            tab[i] = m_a * tab[i] + (1 - m_a) * m_left;
-            m_left = tab[i];
-        }else { // prawy
-            tab[i] = m_a * tab[i] + (1 - m_a) * m_right;
-            m_right = tab[i];
+void LowPassFilter::process(std::vector<float> &t) {
+    int index = 0;
+    for (int i = 0; i < t.size(); i++) {
+        index = i % 2;
+        if (index == 0) { //lewy kanal
+            t[i] = m_a * t[i] + (1-m_a) * m_left;
+            m_left = t[i];
+        }else { //prawy kanal
+            t[i] = m_a * t[i] + (1-m_a) * m_right;
+            m_right = t[i];
         }
     }
 }

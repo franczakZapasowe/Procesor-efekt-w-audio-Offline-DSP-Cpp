@@ -4,8 +4,7 @@
 
 #include "GainEffect.h"
 #include <algorithm>
-void GainEffect::process(std::vector<float> &data) {
-    std::transform(data.begin(), data.end(), data.begin(),[=](float x) {
-    return x * m_gainMultiply;
-});
+void GainEffect::process(std::vector<float> &t) {
+    for (int i = 0; i < t.size(); i++) t[i]*=m_gain;
 }
+

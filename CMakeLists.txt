@@ -17,4 +17,6 @@ add_executable(OfflineDSP main.cpp
         LowPassEffect.h
         CompressorEffect.cpp
         CompressorEffect.h
+        MultibandCompressor.cpp
+        MultibandCompressor.h
 )
