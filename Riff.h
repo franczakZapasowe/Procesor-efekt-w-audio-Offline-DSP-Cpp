@@ -1,9 +1,5 @@
-//
-// Created by mf on 8/23/26.
-//
-
-#ifndef OFFLINEDSP_RIFF_H
-#define OFFLINEDSP_RIFF_H
+#pragma once
+#include <iostream>
 #pragma pack(push, 1)
 struct Riff {
     char ChunkID[4];        //SYGNATURA FORMATU RIFF
@@ -21,4 +17,3 @@ struct Riff {
     uint32_t SubChunk2Size; //ROZMIAR SAMYCH DANYCH AUDIO W BAJTACH ILE BAJTOW ZAJMUJA WSZYSTKIE PROBKI LACZNIE
 };
 #pragma pack(pop)
-#endif //OFFLINEDSP_RIFF_H

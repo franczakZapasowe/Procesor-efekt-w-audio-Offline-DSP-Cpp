@@ -13,4 +13,8 @@ add_executable(OfflineDSP main.cpp
         DelayEffect.cpp
         DelayEffect.h
         Riff.h
+        LowPassEffect.cpp
+        LowPassEffect.h
+        CompressorEffect.cpp
+        CompressorEffect.h
 )

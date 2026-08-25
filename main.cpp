@@ -5,8 +5,11 @@
 #include <vector>
 #include <algorithm>
 
+#include "DelayEffect.h"
 #include "GainEffect.h"
 #include "Riff.h"
+#include "DistortionEffect.h"
+#include "LowPassEffect.h"
 
 int main() {
     Riff riff;
@@ -28,8 +31,17 @@ int main() {
         bo na głośnym pliku przesterujesz sygnał powyżej cyfrowego zera, czyli wartości 1.0 lub -1.0).
     */
 
-    GainEffect gEffect(0.5);
-    gEffect.process(data);
+   // GainEffect gEffect(0.5);
+    //gEffect.process(data);
+
+    // DelayEffect delay(0.5,riff,200);
+    // delay.process(data);
+
+    // DistortionEffect distrotion(5.0);
+    // distrotion.process(data);
+
+    LowPassEffect lowPass (1);
+    lowPass.process(data);
 
     plik = fopen("Sciszony_Bell.wav", "wb");
     if (plik==nullptr) {
