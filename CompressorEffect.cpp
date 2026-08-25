@@ -14,15 +14,23 @@ void CompressorEffect::process(std::vector<float> &data) {
     float db = 0;
     float overshot = 0;
     float gr;
-    float multiplier;
+    float multiplier = 1.0;
     for (int i = 0; i < data.size(); i++) {
         temp = std::fabs(data[i]);
-        if (temp == 0) continue;
-        db = 20.0f * std::log10(temp);
-        if (db < m_threshold) continue;  // czy przekracza threshold
-        overshot = db - m_threshold;    // o ile
-        gr = overshot - overshot/m_ratio; // tu pracujemy na decybelach
-        multiplier = std::pow(10 , (-gr/20));
-        data[i] *=multiplier;
+        if (temp == 0) multiplier = 1.0f;
+        else {
+            db = 20.0f * std::log10(temp);
+            if (db >  m_threshold) {
+                overshot = db - m_threshold;    // o ile
+                gr = overshot - overshot/m_ratio; // tu pracujemy na decybelach
+                multiplier = std::pow(10 , (-gr/20)); // przeliczamy z db na jezyk 0 - 1
+            } else multiplier = 1.0f;
+        }
+        if (multiplier < m_currentGain) { // atack
+            m_currentGain = (m_alphaAttack * m_currentGain) + ((1.0f - m_alphaAttack)*multiplier);
+        }else if (multiplier > m_currentGain) { //relese
+            m_currentGain = (m_alphaRelease * m_currentGain) + ((1.0f - m_alphaRelease)*multiplier);
+        }
+        data[i] *=m_currentGain;
     }
 }
