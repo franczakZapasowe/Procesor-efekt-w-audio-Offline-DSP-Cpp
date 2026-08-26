@@ -26,6 +26,5 @@ class CompressorEffect : public AudioEffect {
         m_alfaRelese = std::exp(-1000.0f / (riff.SampleRate * relese) );
     }
     void process(std::vector<float> &) override;
-
 };
 

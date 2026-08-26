@@ -40,7 +40,7 @@ int main() {
     // DistortionEffect distrotion(5.0);
     // distrotion.process(data);
 
-    LowPassEffect lowPass (1);
+    LowPassFilter lowPass (1);
     lowPass.process(data);
 
     plik = fopen("Sciszony_Bell.wav", "wb");

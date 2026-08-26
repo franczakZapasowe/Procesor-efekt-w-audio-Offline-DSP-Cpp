@@ -9,12 +9,26 @@
 #include "LowPassEffect.h"
 
 class MultibandCompressor: public AudioEffect {
-    LowPassFilter m_crossover;
+    LowPassFilter m_lowCrossover;
+    LowPassFilter m_lowMidCrossover;
+    LowPassFilter m_MidCrossover;
+    LowPassFilter m_HighMidCrossover;
+
+
     CompressorEffect m_compLow;
+    CompressorEffect m_compLowMid;
+    CompressorEffect m_compMid;
+    CompressorEffect m_compHighMid;
     CompressorEffect m_compHigh;
     public:
-    MultibandCompressor(const LowPassFilter &crossover, const CompressorEffect &compLow, const CompressorEffect &compHigh)
-        : m_crossover(crossover), m_compLow(compLow), m_compHigh(compHigh){}
+
+    MultibandCompressor(LowPassFilter lowCrossower, LowPassFilter lowMidCrossover, LowPassFilter midCrossover, LowPassFilter MidHighCrossover,
+                    CompressorEffect compLow,CompressorEffect compLowMid,CompressorEffect compMid, CompressorEffect compHighMid, CompressorEffect compHigh)
+                        :m_lowCrossover(lowCrossower), m_lowMidCrossover(lowMidCrossover),m_MidCrossover(midCrossover),m_HighMidCrossover(MidHighCrossover),
+                        m_compLow (compLow), m_compLowMid(compLowMid),m_compMid(compMid),m_compHighMid(compHighMid),m_compHigh(compHigh)
+                        {
+                    
+                        }
     void process(std::vector<float> &) override;
 };
 
