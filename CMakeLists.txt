@@ -19,4 +19,6 @@ add_executable(OfflineDSP main.cpp
         CompressorEffect.h
         MultibandCompressor.cpp
         MultibandCompressor.h
+        EqualizerEffect.cpp
+        EqualizerEffect.h
 )
